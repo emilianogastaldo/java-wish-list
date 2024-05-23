@@ -4,8 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -19,19 +18,23 @@ public class Main {
         wishReader.close();
         Scanner scanner = new Scanner(System.in);
 //        Se inizializzo il Writer nel ciclo andrò a riscrivere ogni volta il file.
-        FileWriter wishWriter = new FileWriter(wishListText, true);
         boolean stop = false;
         while (!stop){
+            System.out.println("Lunghezza lista: "+wishList.toArray().length);
             System.out.println("Che regalo vuoi inserire? Scrivi no per uscire");
             String regalo = scanner.nextLine();
             if(regalo.equals("no")){
                 stop = true;
+                Collections.sort(wishList);
+                FileWriter wishWriter = new FileWriter(wishListText);
+                for (String wish : wishList) {
+                    wishWriter.write(wish+"\n");
+                }
+                wishWriter.close();
             }else {
                 wishList.add(regalo);
-                wishWriter.write(regalo+"\n");
             }
         }
-        wishWriter.close();
         scanner.close();
         System.out.println(wishList.toString());
     }
