@@ -1,7 +1,6 @@
 package esercizio;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
@@ -25,7 +24,9 @@ public class Main {
             String regalo = scanner.nextLine();
             if(regalo.equals("no")){
                 stop = true;
+//                Ordino la lista
                 Collections.sort(wishList);
+//                Riscrivo il file con la lista ordinata:
                 FileWriter wishWriter = new FileWriter(wishListText);
                 for (String wish : wishList) {
                     wishWriter.write(wish+"\n");
@@ -36,6 +37,6 @@ public class Main {
             }
         }
         scanner.close();
-        System.out.println(wishList.toString());
+        System.out.println(wishList);
     }
 }
